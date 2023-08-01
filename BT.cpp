@@ -39,6 +39,7 @@ class binaryTree{
             cout<<"Tree is empty"<<endl;
             return;
         }
+        cout<<"InOrder Traversal: ";
         stack<node*> st;
         node* current = this->root;
         while(current != NULL || !st.empty()){
@@ -54,6 +55,27 @@ class binaryTree{
         cout<<endl;
     }
 
+    void preorderNR(){
+        if(this->root == NULL){
+            cout<<"Tree is empty"<<endl;
+            return;
+        }
+        cout<<"PreOrder Traversal: ";
+        stack<node*> st;
+        node* current = this->root;
+        st.push(current);
+            while(!st.empty()){
+                current = st.top();
+                st.pop();
+                cout<<current->data<<" ";
+                if(current->right != NULL)
+                    st.push(current->right);
+                if(current->left != NULL)
+                    st.push(current->left);
+            }
+        cout<<endl;
+    }
+
 };
 
 int main(){
@@ -64,5 +86,6 @@ int main(){
     bt->root = bt->insertLevelOrder(bt->root, arr, 0, arr.size());
 
     bt->inorderNR();
+    bt->preorderNR();
     return 0;
 }
