@@ -25,6 +25,13 @@ class binaryTree{
     binaryTree(int data){
         this->root = new node(data);
     }
+    bool empty(){
+        if(this->root == NULL){
+            cout<<"Tree is empty"<<endl;
+            return true;
+        }
+        else return false;
+    }
     node* insertLevelOrder(node* root, vector<int> arr, int index, int arrSize){
         if(index<arrSize){
             node* temp = new node(arr.at(index));
@@ -35,10 +42,9 @@ class binaryTree{
         return root;
     }
     void inorderNR(){
-        if(this->root == NULL){
-            cout<<"Tree is empty"<<endl;
+        if(empty())
             return;
-        }
+
         cout<<"InOrder Traversal: ";
         stack<node*> st;
         node* current = this->root;
@@ -56,10 +62,9 @@ class binaryTree{
     }
 
     void preorderNR(){
-        if(this->root == NULL){
-            cout<<"Tree is empty"<<endl;
+        if(this->root == NULL)
             return;
-        }
+ 
         cout<<"PreOrder Traversal: ";
         stack<node*> st;
         node* current = this->root;
@@ -75,7 +80,32 @@ class binaryTree{
             }
         cout<<endl;
     }
+    void postorderNR(){
+        if (empty())
+            return;
 
+        cout<<"PostOrder Traversal: ";
+        stack<node*> s1;
+        stack<node*> s2;
+        s1.push(root);
+        while (!s1.empty()) {
+            node* current = s1.top();
+            s1.pop();
+            s2.push(current);
+
+            if (current->left)
+                s1.push(current->left);
+
+            if (current->right)
+                s1.push(current->right);
+        }
+        while (!s2.empty()) {
+            node* current = s2.top();
+            s2.pop();
+            cout << current->data << " ";
+        }
+        cout<<endl;
+    }
 };
 
 int main(){
@@ -87,5 +117,6 @@ int main(){
 
     bt->inorderNR();
     bt->preorderNR();
+    bt->postorderNR();
     return 0;
 }
