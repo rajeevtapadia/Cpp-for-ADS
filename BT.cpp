@@ -2,6 +2,8 @@
 #include <stack>
 #include <queue>
 
+using namespace std;
+
 class node{
     private:
     int data;
@@ -9,12 +11,23 @@ class node{
     node* right;
 
     public:
-    // struct node* createNode(int input){
-    //     struct node* new_node = new node()
-    // }
     node(int input){
         this->left = NULL;
         this->right = NULL;
         this->data = input;
     }
+};
+
+class binaryTree{
+    private:
+    node* root;
+
+    public:
+    binaryTree(int data){
+        this->root = new node(data);
+    }
+};
+
+void main(){
+    binaryTree *bt = new binaryTree(1);
 }
